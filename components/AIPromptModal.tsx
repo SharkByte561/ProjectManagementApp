@@ -101,7 +101,7 @@ export function AIPromptModal({
                 <div className="space-y-4">
                   <div className="rounded-lg bg-gray-50 border-2 border-gray-200 p-4">
                     <p className="text-xs text-gray-600 font-semibold mb-3 uppercase tracking-wide">
-                      Generated Prompt for Claude Code
+                      Generated Implementation Prompt
                     </p>
                     <p className="text-sm text-gray-800 leading-relaxed whitespace-pre-wrap">
                       {prompt}
@@ -109,7 +109,7 @@ export function AIPromptModal({
                   </div>
                   <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-3">
                     <p className="text-xs text-blue-700">
-                      💡 <span className="font-semibold">Tip:</span> Copy this prompt and paste it directly into Claude Code to generate the implementation for this feature.
+                      💡 <span className="font-semibold">Tip:</span> Copy this prompt and paste it into your preferred AI assistant or development tool to generate the implementation for this feature.
                     </p>
                   </div>
                 </div>

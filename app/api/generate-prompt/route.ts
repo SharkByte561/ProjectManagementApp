@@ -23,8 +23,8 @@ export async function POST(request: NextRequest) {
       apiKey: process.env.OPENAI_API_KEY,
     })
 
-    const systemPrompt = `You are an expert software engineer and Claude Code prompt writer.
-Your task is to convert a task title (and optional notes) into a detailed, actionable prompt that Claude Code can use to implement the feature.
+    const systemPrompt = `You are an expert software engineer specializing in implementation guidance.
+Your task is to convert a task title (and optional notes) into a detailed, actionable prompt for implementing the feature.
 
 The prompt should:
 1. Clearly describe what feature needs to be built
@@ -33,11 +33,11 @@ The prompt should:
 4. Suggest best practices and patterns to use
 5. Be concise but comprehensive enough to guide implementation
 
-Format the output as a clear, professional prompt that a developer could immediately use with Claude Code.`
+Format the output as a clear, professional prompt that a developer could immediately use.`
 
     const userMessage = notes
-      ? `Task Title: "${title}"\n\nTask Notes: "${notes}"\n\nPlease create a Claude Code prompt for implementing this feature.`
-      : `Task Title: "${title}"\n\nPlease create a Claude Code prompt for implementing this feature.`
+      ? `Task Title: "${title}"\n\nTask Notes: "${notes}"\n\nPlease create a detailed implementation prompt for this feature.`
+      : `Task Title: "${title}"\n\nPlease create a detailed implementation prompt for this feature.`
 
     const response = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
