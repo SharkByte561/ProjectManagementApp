@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Trash2, ChevronDown, ChevronUp } from 'lucide-react'
+import { Trash2, ChevronDown, ChevronUp, Sparkles } from 'lucide-react'
 import { Task } from '@/types/kanban'
 
 interface TaskCardProps {
@@ -11,6 +11,7 @@ interface TaskCardProps {
   onDelete: (taskId: string) => void
   onUpdateTitle: (taskId: string, title: string) => void
   onUpdateNotes: (taskId: string, notes: string) => void
+  onGeneratePrompt?: (taskId: string, title: string, notes: string) => void
 }
 
 export function TaskCard({
@@ -19,6 +20,7 @@ export function TaskCard({
   onDelete,
   onUpdateTitle,
   onUpdateNotes,
+  onGeneratePrompt,
 }: TaskCardProps) {
   const [isNotesOpen, setIsNotesOpen] = useState(false)
   const [isEditingTitle, setIsEditingTitle] = useState(false)
@@ -69,6 +71,20 @@ export function TaskCard({
             animate={{ scale: [1, 1.2, 1] }}
             transition={{ duration: 0.6, repeat: Infinity }}
           />
+        )}
+
+        {/* AI Button */}
+        {onGeneratePrompt && (
+          <motion.button
+            onClick={() => onGeneratePrompt(task.id, task.title, task.notes)}
+            className="absolute -top-2 -right-8 bg-purple-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-purple-600 shadow-soft"
+            aria-label="Generate AI prompt"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            title="Generate Claude Code prompt with AI"
+          >
+            <Sparkles size={12} />
+          </motion.button>
         )}
 
         {/* Delete Button */}

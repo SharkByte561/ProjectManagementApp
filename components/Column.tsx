@@ -17,6 +17,7 @@ interface ColumnProps {
   onDeleteTask: (taskId: string) => void
   onUpdateTask: (taskId: string, title: string, notes: string) => void
   onDeleteColumn: (columnId: string) => void
+  onGeneratePrompt?: (taskId: string, title: string, notes: string) => void
   isDragging?: boolean
 }
 
@@ -25,6 +26,7 @@ function SortableTaskCard({
   onDelete,
   onUpdateTitle,
   onUpdateNotes,
+  onGeneratePrompt,
   isDragging: isColumnDragging,
 }: any) {
   const {
@@ -52,6 +54,7 @@ function SortableTaskCard({
         onDelete={onDelete}
         onUpdateTitle={onUpdateTitle}
         onUpdateNotes={onUpdateNotes}
+        onGeneratePrompt={onGeneratePrompt}
       />
     </div>
   )
@@ -64,6 +67,7 @@ export function Column({
   onDeleteTask,
   onUpdateTask,
   onDeleteColumn,
+  onGeneratePrompt,
   isDragging,
 }: ColumnProps) {
   const { setNodeRef, isOver } = useDroppable({ id: column.id })
@@ -137,6 +141,7 @@ export function Column({
                       onUpdateNotes={(taskId: string, notes: string) =>
                         onUpdateTask(taskId, task.title, notes)
                       }
+                      onGeneratePrompt={onGeneratePrompt}
                       isDragging={isDragging}
                     />
                   </div>

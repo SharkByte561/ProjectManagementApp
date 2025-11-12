@@ -16,6 +16,7 @@ import { Plus } from 'lucide-react'
 import { useKanban } from '@/hooks/useKanban'
 import { Column } from './Column'
 import { AddColumnModal } from './AddColumnModal'
+import { AIPromptModal } from './AIPromptModal'
 import { ColorValue } from '@/types/kanban'
 
 export function Board() {
@@ -31,6 +32,11 @@ export function Board() {
 
   const [showAddColumn, setShowAddColumn] = useState(false)
   const [activeId, setActiveId] = useState<string | null>(null)
+  const [showAIPrompt, setShowAIPrompt] = useState(false)
+  const [aiPromptLoading, setAIPromptLoading] = useState(false)
+  const [aiPromptText, setAIPromptText] = useState('')
+  const [aiPromptTaskTitle, setAIPromptTaskTitle] = useState('')
+  const [aiPromptError, setAIPromptError] = useState<string | undefined>()
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -106,6 +112,41 @@ export function Board() {
     updateTask(taskId, { title, notes })
   }
 
+  const handleGeneratePrompt = async (
+    _taskId: string,
+    title: string,
+    notes: string
+  ) => {
+    setShowAIPrompt(true)
+    setAIPromptTaskTitle(title)
+    setAIPromptLoading(true)
+    setAIPromptError(undefined)
+
+    try {
+      const response = await fetch('/api/generate-prompt', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title, notes }),
+      })
+
+      if (!response.ok) {
+        const error = await response.json()
+        throw new Error(error.error || 'Failed to generate prompt')
+      }
+
+      const data = await response.json()
+      setAIPromptText(data.prompt)
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'An unknown error occurred'
+      setAIPromptError(errorMessage)
+    } finally {
+      setAIPromptLoading(false)
+    }
+  }
+
   return (
     <div className="min-h-screen overflow-hidden flex flex-col">
       {/* Header */}
@@ -164,6 +205,7 @@ export function Board() {
                   onDeleteTask={deleteTask}
                   onUpdateTask={handleUpdateTask}
                   onDeleteColumn={deleteColumn}
+                  onGeneratePrompt={handleGeneratePrompt}
                   isDragging={activeId !== null}
                 />
               )
@@ -223,6 +265,20 @@ export function Board() {
           </div>
         </motion.main>
       </DndContext>
+
+      {/* AI Prompt Modal */}
+      <AIPromptModal
+        isOpen={showAIPrompt}
+        isLoading={aiPromptLoading}
+        prompt={aiPromptText}
+        taskTitle={aiPromptTaskTitle}
+        error={aiPromptError}
+        onClose={() => {
+          setShowAIPrompt(false)
+          setAIPromptText('')
+          setAIPromptError(undefined)
+        }}
+      />
 
       {/* Add Column Modal */}
       <AddColumnModal
