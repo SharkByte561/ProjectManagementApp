@@ -5,6 +5,7 @@ const config: Config = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -21,6 +22,15 @@ const config: Config = {
         'soft-blue-dark': '#3B82F6',
         'soft-green': '#BBEF63',
         'soft-green-dark': '#84CC16',
+        // Theme colors using CSS variables
+        'bg-primary': 'rgb(var(--color-bg-primary) / <alpha-value>)',
+        'bg-secondary': 'rgb(var(--color-bg-secondary) / <alpha-value>)',
+        'bg-tertiary': 'rgb(var(--color-bg-tertiary) / <alpha-value>)',
+        'text-primary': 'rgb(var(--color-text-primary) / <alpha-value>)',
+        'text-secondary': 'rgb(var(--color-text-secondary) / <alpha-value>)',
+        'text-tertiary': 'rgb(var(--color-text-tertiary) / <alpha-value>)',
+        'border': 'rgb(var(--color-border) / <alpha-value>)',
+        'border-hover': 'rgb(var(--color-border-hover) / <alpha-value>)',
       },
       boxShadow: {
         'soft': '0 1px 3px 0 rgba(0, 0, 0, 0.08)',

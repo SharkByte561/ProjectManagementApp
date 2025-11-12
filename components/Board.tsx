@@ -18,6 +18,7 @@ import { Column } from './Column'
 import { AddColumnModal } from './AddColumnModal'
 import { AIPromptModal } from './AIPromptModal'
 import { ColorValue } from '@/types/kanban'
+import ThemeToggle from './ThemeToggle'
 
 export function Board() {
   const {
@@ -153,7 +154,7 @@ export function Board() {
       <motion.header
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-soft"
+        className="bg-bg-secondary border-b border-border sticky top-0 z-40 shadow-soft"
       >
         <div className="max-w-full px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4">
@@ -163,15 +164,16 @@ export function Board() {
                   ✓
                 </div>
                 <div>
-                  <h1 className="text-2xl font-bold text-gray-900">
+                  <h1 className="text-2xl font-bold text-text-primary">
                     Vibe App Design Board
                   </h1>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-text-secondary">
                     Design, plan, and manage your app projects
                   </p>
                 </div>
               </div>
             </div>
+            <ThemeToggle />
           </div>
         </div>
       </motion.header>
@@ -219,7 +221,7 @@ export function Board() {
             >
               <button
                 onClick={() => setShowAddColumn(true)}
-                className="w-full h-full min-h-96 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-400 hover:bg-blue-50/50 transition-all duration-200 flex items-center justify-center group"
+                className="w-full h-full min-h-96 border-2 border-dashed border-border hover:border-blue-400 hover:bg-blue-50/50 dark:hover:bg-blue-900/20 transition-all duration-200 flex items-center justify-center group"
               >
                 <motion.div
                   className="text-center"
@@ -232,13 +234,13 @@ export function Board() {
                   >
                     <Plus
                       size={32}
-                      className="text-gray-400 group-hover:text-blue-500 transition-colors"
+                      className="text-text-tertiary group-hover:text-blue-500 transition-colors"
                     />
                   </motion.div>
-                  <h3 className="text-sm font-semibold text-gray-700 group-hover:text-blue-600 transition-colors">
+                  <h3 className="text-sm font-semibold text-text-secondary group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                     Add Column
                   </h3>
-                  <p className="text-xs text-gray-500 mt-1 group-hover:text-gray-600">
+                  <p className="text-xs text-text-tertiary mt-1 group-hover:text-text-secondary">
                     Create new workflow stage
                   </p>
                 </motion.div>
@@ -253,10 +255,10 @@ export function Board() {
                 className="flex items-center justify-center min-h-96 w-full"
               >
                 <div className="text-center">
-                  <h3 className="text-lg font-semibold text-gray-700 mb-2">
+                  <h3 className="text-lg font-semibold text-text-primary mb-2">
                     No columns yet
                   </h3>
-                  <p className="text-sm text-gray-500 mb-4">
+                  <p className="text-sm text-text-secondary mb-4">
                     Click the "Add Column" card to get started
                   </p>
                 </div>
