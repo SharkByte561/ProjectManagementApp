@@ -73,7 +73,7 @@ export function Column({
   return (
     <motion.div
       layout
-      className="flex-shrink-0 w-80 flex flex-col bg-white rounded-lg overflow-hidden shadow-soft hover:shadow-soft-md transition-shadow duration-200"
+      className="flex-shrink-0 w-80 flex flex-col bg-bg-secondary rounded-lg overflow-hidden shadow-soft hover:shadow-soft-md transition-shadow duration-200"
       animate={{
         boxShadow: isOver ? '0 20px 25px -5px rgba(0, 0, 0, 0.15)' : '0 1px 3px 0 rgba(0, 0, 0, 0.08)',
       }}
@@ -82,17 +82,17 @@ export function Column({
       <div className={`${bgColor} px-4 py-3 border-b border-opacity-30`}>
         <div className="flex items-center justify-between gap-3">
           <div className="flex-1">
-            <h2 className={`text-sm font-semibold text-gray-900 truncate`}>
+            <h2 className={`text-sm font-semibold text-text-primary truncate`}>
               {column.title}
             </h2>
-            <p className={`text-xs text-gray-500 mt-1`}>
+            <p className={`text-xs text-text-secondary mt-1`}>
               {tasks.length} {tasks.length === 1 ? 'task' : 'tasks'}
             </p>
           </div>
           {column.id !== 'todo' && column.id !== 'in-progress' && column.id !== 'completed' && (
             <motion.button
               onClick={() => onDeleteColumn(column.id)}
-              className="p-1.5 hover:bg-red-100 rounded transition-colors text-red-500 hover:text-red-700"
+              className="p-1.5 hover:bg-red-100 dark:hover:bg-red-900/30 rounded transition-colors text-red-500 hover:text-red-700 dark:hover:text-red-400"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               title="Delete column"
@@ -108,8 +108,8 @@ export function Column({
         ref={setNodeRef}
         className={`flex-1 p-3 overflow-y-auto transition-all duration-200 ${
           isOver
-            ? 'bg-gradient-to-b from-blue-50 to-blue-100/50 ring-2 ring-inset ring-blue-300'
-            : 'bg-white'
+            ? 'bg-gradient-to-b from-blue-50 to-blue-100/50 dark:from-blue-900/30 dark:to-blue-800/30 ring-2 ring-inset ring-blue-300 dark:ring-blue-600'
+            : 'bg-bg-secondary'
         }`}
         style={{ minHeight: '500px' }}
       >
@@ -122,7 +122,7 @@ export function Column({
                 animate={{ opacity: 0.4 }}
                 className="text-center py-12 pointer-events-none"
               >
-                <p className="text-xs text-gray-400">Drag tasks here</p>
+                <p className="text-xs text-text-tertiary">Drag tasks here</p>
               </motion.div>
             ) : (
               <motion.div className="space-y-2">
@@ -150,7 +150,7 @@ export function Column({
       {/* Add Task Button */}
       <motion.button
         onClick={() => setShowAddModal(true)}
-        className={`${bgColor} px-4 py-2 flex items-center justify-center gap-2 text-xs font-medium text-gray-700 hover:opacity-90 transition-opacity border-t`}
+        className={`${bgColor} px-4 py-2 flex items-center justify-center gap-2 text-xs font-medium text-text-primary hover:opacity-90 transition-opacity border-t`}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
       >

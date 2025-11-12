@@ -38,12 +38,12 @@ export function TaskCard({
       onHoverEnd={() => setIsHovering(false)}
     >
       <motion.div
-        className={`relative bg-white rounded-xl p-3 border-2 transition-all duration-150 ${
+        className={`relative bg-bg-secondary rounded-xl p-3 border-2 transition-all duration-150 ${
           isDragging
-            ? 'scale-105 shadow-2xl border-blue-400 ring-2 ring-blue-200 z-50'
+            ? 'scale-105 shadow-2xl border-blue-400 ring-2 ring-blue-200 dark:border-blue-500 dark:ring-blue-700 z-50'
             : isHovering
-            ? 'shadow-soft-md border-blue-300 bg-blue-50/30'
-            : 'shadow-soft border-gray-200 hover:shadow-soft-md hover:border-gray-300'
+            ? 'shadow-soft-md border-blue-300 dark:border-blue-600 bg-blue-50/30 dark:bg-blue-900/20'
+            : 'shadow-soft border-border hover:shadow-soft-md hover:border-border-hover'
         }`}
         whileHover={isDragging ? {} : { y: -3, transition: { duration: 0.2 } }}
         animate={{
@@ -94,13 +94,13 @@ export function TaskCard({
               onKeyDown={(e) => {
                 if (e.key === 'Enter') setIsEditingTitle(false)
               }}
-              className="w-full px-2 py-1 text-xs font-semibold border border-gray-300 rounded text-gray-900 bg-gray-50 focus:outline-none focus:border-blue-500 focus:bg-white"
+              className="w-full px-2 py-1 text-xs font-semibold border border-border rounded text-text-primary bg-bg-tertiary focus:outline-none focus:border-blue-500 focus:bg-bg-secondary"
               maxLength={100}
             />
           ) : (
             <h3
               onClick={() => setIsEditingTitle(true)}
-              className="text-xs font-semibold text-gray-900 break-words cursor-pointer hover:text-blue-600 transition-colors line-clamp-3"
+              className="text-xs font-semibold text-text-primary break-words cursor-pointer hover:text-blue-600 dark:hover:text-blue-400 transition-colors line-clamp-3"
             >
               {task.title || 'Untitled Task'}
             </h3>
@@ -111,7 +111,7 @@ export function TaskCard({
         {(task.notes || isNotesOpen) && (
           <motion.button
             onClick={() => setIsNotesOpen(!isNotesOpen)}
-            className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-700 transition-colors"
+            className="flex items-center gap-1 text-xs text-text-secondary hover:text-text-primary transition-colors"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -127,7 +127,7 @@ export function TaskCard({
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="mt-2 pt-2 border-t border-gray-200"
+            className="mt-2 pt-2 border-t border-border"
           >
             {isEditingNotes ? (
               <textarea
@@ -135,7 +135,7 @@ export function TaskCard({
                 value={task.notes}
                 onChange={(e) => onUpdateNotes(task.id, e.target.value)}
                 onBlur={() => setIsEditingNotes(false)}
-                className="w-full px-2 py-1 text-xs border border-gray-300 rounded text-gray-700 bg-gray-50 focus:outline-none focus:border-blue-500 focus:bg-white resize-none"
+                className="w-full px-2 py-1 text-xs border border-border rounded text-text-primary bg-bg-tertiary focus:outline-none focus:border-blue-500 focus:bg-bg-secondary resize-none"
                 rows={2}
                 maxLength={500}
                 placeholder="Add your notes here..."
@@ -143,7 +143,7 @@ export function TaskCard({
             ) : (
               <p
                 onClick={() => setIsEditingNotes(true)}
-                className="text-xs text-gray-600 whitespace-pre-wrap break-words cursor-pointer hover:text-gray-700 transition-colors"
+                className="text-xs text-text-secondary whitespace-pre-wrap break-words cursor-pointer hover:text-text-primary transition-colors"
               >
                 {task.notes || 'Click to add notes...'}
               </p>
