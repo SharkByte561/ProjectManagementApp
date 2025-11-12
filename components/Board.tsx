@@ -164,10 +164,10 @@ export function Board() {
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">
-                    Vibe Kanban
+                    Vibe App Design Board
                   </h1>
                   <p className="text-xs text-gray-500">
-                    Your beautiful project management board
+                    Design, plan, and manage your app projects
                   </p>
                 </div>
               </div>

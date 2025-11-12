@@ -7,8 +7,8 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'VibeKanban - Project Management',
-  description: 'A beautiful kanban board for managing your projects with vibes',
+  title: 'Vibe App Design Board',
+  description: 'A beautiful design board for managing your app projects with vibes',
 }
 
 export default function RootLayout({
