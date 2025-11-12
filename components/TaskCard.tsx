@@ -73,30 +73,33 @@ export function TaskCard({
           />
         )}
 
-        {/* AI Button */}
-        {onGeneratePrompt && (
+        {/* Button Group */}
+        <div className="absolute -top-2 -right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+          {/* AI Button */}
+          {onGeneratePrompt && (
+            <motion.button
+              onClick={() => onGeneratePrompt(task.id, task.title, task.notes)}
+              className="bg-purple-500 text-white rounded-full p-1 hover:bg-purple-600 shadow-soft"
+              aria-label="Generate prompt with OpenAI"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              title="Generate prompt with OpenAI"
+            >
+              <Sparkles size={12} />
+            </motion.button>
+          )}
+
+          {/* Delete Button */}
           <motion.button
-            onClick={() => onGeneratePrompt(task.id, task.title, task.notes)}
-            className="absolute -top-2 -right-8 bg-purple-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-purple-600 shadow-soft"
-            aria-label="Generate AI prompt"
+            onClick={() => onDelete(task.id)}
+            className="bg-red-500 text-white rounded-full p-1 hover:bg-red-600 shadow-soft"
+            aria-label="Delete task"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            title="Generate Claude Code prompt with AI"
           >
-            <Sparkles size={12} />
+            <Trash2 size={12} />
           </motion.button>
-        )}
-
-        {/* Delete Button */}
-        <motion.button
-          onClick={() => onDelete(task.id)}
-          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600 shadow-soft"
-          aria-label="Delete task"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-        >
-          <Trash2 size={12} />
-        </motion.button>
+        </div>
 
         {/* Title */}
         <div className="mb-2">
